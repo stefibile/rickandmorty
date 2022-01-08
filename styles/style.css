@@ -1,0 +1,100 @@
+* {
+  all: unset;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  background-color: #141414;
+  font-family: "Jura", sans-serif;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 30px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 500px;
+  padding: 15px;
+  border-radius: 20px;
+  border: 1px solid #fcf9f95c;
+  box-shadow: #ff613d 2px 1px 8px -3px, #150ed8 -1px -1px 8px -1px;
+  color: white;
+  background-color: #1b232c;
+  cursor: pointer;
+  flex-grow: 1;
+}
+.card .title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card .status {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 5px 0 5px 0;
+}
+.card:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.01);
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: 900;
+  color: white;
+  margin: 20px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.status-location {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 10px 0 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+h4 {
+  color: orange;
+}
+
+.nav-list {
+  height: 50px;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  justify-content: end;
+}
+.nav-list .nav-item {
+  margin: 10px 30px 10px 10px;
+  cursor: pointer;
+}
+.nav-list .nav-item:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+}
+
+/*# sourceMappingURL=style.css.map */
