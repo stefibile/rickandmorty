@@ -1,5 +1,4 @@
 * {
-  all: unset;
   margin: 0;
   padding: 0;
 }
@@ -51,7 +50,6 @@ body {
   display: flex;
   flex-direction: column;
   width: 250px;
-  height: 500px;
   padding: 15px;
   border-radius: 20px;
   border: 1px solid #fcf9f95c;
@@ -71,6 +69,7 @@ body {
   justify-content: center;
 }
 .card .status {
+  display: flex;
   font-size: 20px;
   font-weight: 400;
   margin: 5px 0 5px 0;
@@ -169,6 +168,14 @@ input.page-number {
 }
 .pagination button:hover {
   background: #ffac4a;
+}
+
+.hidden {
+  display: none;
+}
+
+.subtitle-card {
+  margin: 10px 0;
 }
 
 /*# sourceMappingURL=style.css.map */
