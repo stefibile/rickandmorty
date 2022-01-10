@@ -1,0 +1,174 @@
+* {
+  all: unset;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes float {
+  0% {
+    transform: scale(1.03);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.03);
+  }
+}
+.header {
+  min-height: 100px;
+  max-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.header .logo {
+  width: 90%;
+  position: absolute;
+  object-fit: contain;
+  animation: float 4s ease-in-out infinite;
+}
+.header .background {
+  width: 100%;
+  object-fit: cover;
+}
+
+body {
+  background-color: #141414;
+  font-family: "Jura", sans-serif;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 30px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 500px;
+  padding: 15px;
+  border-radius: 20px;
+  border: 1px solid #fcf9f95c;
+  box-shadow: #ff613d 2px 1px 8px -3px, #150ed8 -1px -1px 8px -1px;
+  color: #dadada;
+  background-color: #1b232c;
+  cursor: pointer;
+  flex-grow: 1;
+}
+.card .title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card .status {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 5px 0 5px 0;
+}
+.card img {
+  object-fit: cover;
+}
+.card:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.01);
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: 900;
+  color: #dadada;
+  margin: 20px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.status-location {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 10px 0 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+h4 {
+  color: #ffac4a;
+}
+
+.nav-list {
+  height: 50px;
+  color: #dadada;
+  font-size: 22px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding-right: 40px;
+  padding-top: 30px;
+  background: #272640;
+}
+.nav-list .nav-item {
+  cursor: pointer;
+}
+.nav-list .nav-item:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+  color: #ffac4a;
+}
+
+input {
+  width: 100%;
+  height: 50px;
+  background: #1b232c;
+  color: #dadada;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  caret-color: #ffac4a;
+}
+input.page-number {
+  width: 150px;
+  border-radius: 6px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  margin-bottom: 30px;
+}
+.pagination button {
+  display: grid;
+  place-content: center;
+  width: 50px;
+  height: 50px;
+  background: #1b232c;
+  color: #dadada;
+  border-radius: 6px;
+}
+.pagination button.disabled {
+  background: transparent;
+  color: #1b232c;
+  border: 1px solid #1b232c;
+  pointer-events: none;
+}
+.pagination button:hover {
+  background: #ffac4a;
+}
+
+/*# sourceMappingURL=style.css.map */

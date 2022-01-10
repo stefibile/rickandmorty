@@ -1,15 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Rick and Morty</title>
 </head>
+
 <body>
 
+    <header class="header">
+        <img class="logo" src="img/logo.png" alt="">
+        <img class="background" src="img/galaxy.jpg" alt="">
+    </header>
+    <nav class="nav">
+        <ul class="nav-list">
+            <li class="nav-item">Characters</li>
+            <li class="nav-item">Episodes</li>
+            <li class="nav-item">Location</li>
+        </ul>
+    </nav>
+    <form action="" class="search">
+        <input type="text" placeholder="Search here">
+    </form>
+    <main class="main">
+
+        <div class="card-container" id="characters"></div>
+
+        <div class="pagination">
+            <button class="first-page" id="first">
+                <i class="fas fa-angle-double-left"></i>
+            </button>
+            <button class="previous-page" id="prev">
+                <i class="fas fa-angle-left"></i>
+            </button>
+            <input type="number" class="page-number" name="page-number" min="1" id="page-number">
+            <button class="next-page" id="next">
+                <i class="fas fa-angle-right"></i>
+            </button>
+            <button class="last-page" id="last">
+                <i class="fas fa-angle-double-right"></i>
+            </button>
+        </div>
+    </main>
+    <footer>
+        Soy un footer
+    </footer>
 
     <script src="index.js"></script>
 </body>
+
 </html>
