@@ -1,4 +1,4 @@
-const baseUrl = "https://rickandmortyapi.com/api/"
+const baseUrl = "https://rickandmortyapi.com/api/";
 
 //FETCH MOSTRAR TODOS LOS PERSONAJES
 
@@ -18,7 +18,7 @@ const allEpisodes = () => {
     });
 };
 
-//CARD PERSONAJES 
+//CARD PERSONAJES
 
 const createCharacterCards = (data) => {
   const characters = document.querySelector("#characters");
@@ -46,4 +46,79 @@ const createCharacterCards = (data) => {
   characters.innerHTML = html;
 };
 
+//PAGINACION
 
+const pageChange = () => {
+  pageInput = document.querySelector("#page-number");
+  let currentPage = 1;
+  pageInput.value = currentPage;
+
+  const first = document.querySelector("#first");
+  const next = document.querySelector("#next");
+  const prev = document.querySelector("#prev");
+  const last = document.querySelector("#last");
+
+  const findLastPage = () => {
+    fetch(`${baseUrl}character`)
+      .then((res) => res.json())
+      .then((data) => {
+        lastPage = data.info.pages;
+        pageInput.setAttribute("max", lastPage);
+      });
+  };
+
+  const disableButtons = () => {
+    if (currentPage === 1) {
+      first.classList.add("disabled")
+      prev.classList.add("disabled");
+    } else if (currentPage === lastPage) {
+      next.classList.add("disabled");
+      last.classList.add("disabled");
+    } else {
+      first.classList.remove("disabled")
+			prev.classList.remove("disabled")
+			next.classList.remove("disabled")
+			last.classList.remove("disabled")
+    }
+  };
+
+  findLastPage();
+  disableButtons();
+
+  const searchInformation = () => {
+    fetch(`${baseUrl}character?page=${currentPage}`)
+      .then((res) => res.json())
+      .then((data) => {
+        createCharacterCards(data.results);
+      });
+    pageInput.value = currentPage;
+    disableButtons();
+  };
+
+  pageInput.oninput = () => {
+    currentPage = pageInput.value;
+    searchInformation();
+  };
+
+  first.onclick = () => {
+    currentPage = 1;
+    searchInformation();
+  };
+
+  prev.onclick = () => {
+    currentPage--;
+    searchInformation();
+  };
+
+  next.onclick = () => {
+    currentPage++;
+    searchInformation();
+  };
+
+  last.onclick = () => {
+    currentPage = lastPage;
+    searchInformation();
+  };
+};
+
+pageChange();
