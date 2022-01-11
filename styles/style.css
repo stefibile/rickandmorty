@@ -144,6 +144,7 @@ input {
   text-align: center;
   caret-color: #ffac4a;
   border-right: none;
+  border-top: none;
   border-bottom: 2px inset transparent;
   outline: none;
 }
@@ -193,43 +194,13 @@ input:focus, input:active {
 }
 
 /* LIGHT MODE */
-.light-mode .card-container {
-  background-color: #b6b3b3;
-}
-
-.light-mode h1,
-.light-mode h3,
-.light-mode h4,
-.light-mode h5,
-.light-mode h6 {
-  color: white;
-}
-
-.light-mode .nav-list,
-.light-mode .nav-filter-mode-changer,
-.light-mode .nav-filter-mode-changer .button-mode {
-  background-color: #504d93;
-  color: #141414;
-}
-
-.light-mode .nav-item {
-  color: #141414;
-}
-
-.light-mode textarea,
-.light-mode select,
-.light-mode input {
-  background-color: #b6b3b3;
-  color: #141414;
-}
-
 .nav-filter-mode-changer {
   height: 50px;
   font-weight: 500;
   display: flex;
   justify-content: space-between;
   background: #272640;
-  padding: 0 30px 0 30px;
+  padding: 0 40px 0 40px;
   list-style: none;
   align-content: center;
   align-items: center;
@@ -239,14 +210,84 @@ input:focus, input:active {
   border: none;
   color: white;
   font-size: 20px;
-}
-.nav-filter-mode-changer .button-mode .nav-item {
   cursor: pointer;
 }
-.nav-filter-mode-changer .button-mode .nav-item:hover {
+.nav-filter-mode-changer .button-mode:hover {
   transition: transform 0.3s ease;
   transform: scale(1.05);
   color: #ffac4a;
+}
+
+.light-mode .nav-filter-mode-changer .button-mode:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+  color: #0034b8;
+}
+
+.light-mode .nav-list .nav-item:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+  color: #0034b8;
+}
+
+body.light-mode {
+  background-color: #b6b3b3;
+}
+
+.light-mode footer {
+  background-color: #b6b3b3;
+}
+
+.light-mode .card-container {
+  background-color: #b6b3b3;
+}
+
+.light-mode .card {
+  color: #212121;
+  background-color: #6c6c7f;
+}
+
+.light-mode h3 {
+  color: #212121;
+  font-weight: 600;
+}
+
+.light-mode h4 {
+  color: #0034b8;
+}
+
+.light-mode .nav-list,
+.light-mode .nav-filter-mode-changer,
+.light-mode .nav-filter-mode-changer .button-mode {
+  background-color: #6c6c7f;
+  color: #212121;
+  font-weight: 600;
+}
+
+.light-mode input {
+  caret-color: #0034b8;
+  background-color: #ccc;
+  color: #212121;
+}
+.light-mode input:focus {
+  border-bottom: 2px inset #0034b8;
+}
+
+.light-mode .pagination {
+  background: #b6b3b3;
+}
+.light-mode .pagination button {
+  background: #ccc;
+  color: #212121;
+}
+.light-mode .pagination button.disabled {
+  background: transparent;
+  color: #212121;
+  border: 1px solid #212121;
+}
+.light-mode .pagination button:hover {
+  background: #0034b8;
+  color: #ccc;
 }
 
 /*# sourceMappingURL=style.css.map */

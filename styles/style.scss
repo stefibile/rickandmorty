@@ -22,6 +22,10 @@ $primary: #ffac4a;
 $primary-light: #ffac4a;
 $white: #dadada;
 $black: #1b232c;
+$secondary:#0034b8;
+$light-mode-bg: #ccc;
+$dark-mode-bg:#212121;
+
 
 .header {
     min-height: 100px;
@@ -164,6 +168,7 @@ input {
     text-align: center;
     caret-color: $primary;
     border-right: none;
+    border-top: none;
     border-bottom: 2px inset transparent;
     outline: none;
     &.page-number {
@@ -215,66 +220,104 @@ input {
 
 /* LIGHT MODE */ 
 
-.light-mode .card-container {
-    background-color: #b6b3b3;
-}
-
-
-.light-mode h1,
-.light-mode h3,
-.light-mode h4,
-.light-mode h5,
-.light-mode h6 {
-    color: white;
-}
-
-.light-mode .nav-list,
-.light-mode .nav-filter-mode-changer,
-.light-mode .nav-filter-mode-changer .button-mode {
-    background-color:hsl(242deg 31% 44%);
-    color: #141414;
-}
-
-.light-mode .nav-item {
-    color: #141414;
-}
-
-
-.light-mode textarea,
-.light-mode select,
-.light-mode input {
-    background-color: #b6b3b3;
-    color: #141414;
-}
-
-
-
-
 .nav-filter-mode-changer {
     height: 50px;
     font-weight: 500;
     display: flex;
     justify-content: space-between;
     background: #272640;
-    padding: 0 30px 0 30px;
+    padding: 0 40px 0 40px;
     list-style: none;
     align-content: center;
     align-items: center;
 
-    .button-mode {
-        background: transparent;
-        border: none;
-        color: white;
-        font-size: 20px;
-        .nav-item {
-            cursor: pointer;
-    
-            &:hover {
-                transition: transform .3s ease;
-                transform: scale(1.05);
-                color: $primary;
-            }
+.button-mode {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+        cursor: pointer;
+        &:hover {
+            transition: transform .3s ease;
+            transform: scale(1.05);
+            color:$primary;
         }
     }
+}
 
+
+ .light-mode .nav-filter-mode-changer .button-mode:hover {
+        transition: transform 0.3s ease;
+        transform: scale(1.05);
+        color:$secondary;  
+ }
+
+.light-mode .nav-list .nav-item:hover {
+        transition: transform 0.3s ease;
+        transform: scale(1.05);
+        color:$secondary;  
+ }
+
+
+
+ body.light-mode {
+        background-color: #b6b3b3;
+    }
+
+.light-mode footer {
+    background-color:#b6b3b3 ;
+}
+
+.light-mode .card-container {
+    background-color: #b6b3b3;
+}
+
+.light-mode .card {
+    color: hsl(0deg 0% 13%);
+    background-color: hsl(240deg 8% 46%);
+}
+
+.light-mode
+ h3 {
+    color:hsl(0deg 0% 13%);
+    font-weight: 600;  
+}
+
+.light-mode h4 {
+    color:hsl(223deg 100% 36%);
+}
+
+.light-mode .nav-list,
+.light-mode .nav-filter-mode-changer,
+.light-mode .nav-filter-mode-changer .button-mode {
+    background-color: hsl(240deg 8% 46%);
+    color: hsl(0deg 0% 13%);
+    font-weight: 600;
+}
+
+.light-mode input {
+    caret-color: $secondary;
+    background-color: $light-mode-bg;
+    color: $dark-mode-bg;
+    &:focus {
+        border-bottom: 2px inset $secondary;
+    }
+}
+
+.light-mode .pagination {
+    background:#b6b3b3 ;
+    button {
+        background: $light-mode-bg;
+        color: $dark-mode-bg;
+   
+        &.disabled {
+            background: transparent;
+            color: $dark-mode-bg;
+            border: 1px solid $dark-mode-bg;
+        }
+        &:hover {
+            background: $secondary;
+            color: $light-mode-bg;
+        }
+    }
 }
