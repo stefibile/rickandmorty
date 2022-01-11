@@ -1,5 +1,4 @@
 * {
-  all: unset;
   margin: 0;
   padding: 0;
 }
@@ -34,7 +33,7 @@
   object-fit: cover;
 }
 
-body {
+body, button, input {
   background-color: #141414;
   font-family: "Jura", sans-serif;
 }
@@ -51,7 +50,6 @@ body {
   display: flex;
   flex-direction: column;
   width: 250px;
-  height: 500px;
   padding: 15px;
   border-radius: 20px;
   border: 1px solid #fcf9f95c;
@@ -71,6 +69,7 @@ body {
   justify-content: center;
 }
 .card .status {
+  display: flex;
   font-size: 20px;
   font-weight: 400;
   margin: 5px 0 5px 0;
@@ -119,6 +118,7 @@ h4 {
   padding-right: 40px;
   padding-top: 30px;
   background: #272640;
+  list-style: none;
 }
 .nav-list .nav-item {
   cursor: pointer;
@@ -127,6 +127,11 @@ h4 {
   transition: transform 0.3s ease;
   transform: scale(1.05);
   color: #ffac4a;
+}
+
+form {
+  display: flex;
+  justify-content: center;
 }
 
 input {
@@ -138,10 +143,17 @@ input {
   font-weight: bold;
   text-align: center;
   caret-color: #ffac4a;
+  border-right: none;
+  border-top: none;
+  border-bottom: 2px inset transparent;
+  outline: none;
 }
 input.page-number {
   width: 150px;
   border-radius: 6px;
+}
+input:focus, input:active {
+  border-bottom: 2px inset #f97432;
 }
 
 .pagination {
@@ -160,6 +172,8 @@ input.page-number {
   background: #1b232c;
   color: #dadada;
   border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
 }
 .pagination button.disabled {
   background: transparent;
@@ -169,6 +183,111 @@ input.page-number {
 }
 .pagination button:hover {
   background: #ffac4a;
+}
+
+.hidden {
+  display: none;
+}
+
+.subtitle-card {
+  margin: 10px 0;
+}
+
+/* LIGHT MODE */
+.nav-filter-mode-changer {
+  height: 50px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  background: #272640;
+  padding: 0 40px 0 40px;
+  list-style: none;
+  align-content: center;
+  align-items: center;
+}
+.nav-filter-mode-changer .button-mode {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+.nav-filter-mode-changer .button-mode:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+  color: #ffac4a;
+}
+
+.light-mode .nav-filter-mode-changer .button-mode:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+  color: #0034b8;
+}
+
+.light-mode .nav-list .nav-item:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+  color: #0034b8;
+}
+
+body.light-mode {
+  background-color: #b6b3b3;
+}
+
+.light-mode footer {
+  background-color: #b6b3b3;
+}
+
+.light-mode .card-container {
+  background-color: #b6b3b3;
+}
+
+.light-mode .card {
+  color: #212121;
+  background-color: #6c6c7f;
+}
+
+.light-mode h3 {
+  color: #212121;
+  font-weight: 600;
+}
+
+.light-mode h4 {
+  color: #0034b8;
+}
+
+.light-mode .nav-list,
+.light-mode .nav-filter-mode-changer,
+.light-mode .nav-filter-mode-changer .button-mode {
+  background-color: #6c6c7f;
+  color: #212121;
+  font-weight: 600;
+}
+
+.light-mode input {
+  caret-color: #0034b8;
+  background-color: #ccc;
+  color: #212121;
+}
+.light-mode input:focus {
+  border-bottom: 2px inset #0034b8;
+}
+
+.light-mode .pagination {
+  background: #b6b3b3;
+}
+.light-mode .pagination button {
+  background: #ccc;
+  color: #212121;
+}
+.light-mode .pagination button.disabled {
+  background: transparent;
+  color: #212121;
+  border: 1px solid #212121;
+}
+.light-mode .pagination button:hover {
+  background: #0034b8;
+  color: #ccc;
 }
 
 /*# sourceMappingURL=style.css.map */

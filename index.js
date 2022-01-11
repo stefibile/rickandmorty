@@ -1,3 +1,67 @@
+// MODO OSCURO 
+
+const lightModeButton = document.getElementById ("light-mode")
+const body = document.getElementById ("body")
+const label = document.getElementById ("toggle-label")
+
+lightModeButton.onclick = () => {
+    body.classList.toggle ("light-mode")
+    if (body.className === "light-mode") {
+        label.innerHTML = "Modo oscuro"
+    }
+    else {
+        label.innerHTML = "Modo claro"
+    }
+}
+
+
+
+// MOSTRAR U OCULTAR SECCIONES
+
+const showEpisodes = document.querySelector("#show-episodes");
+const showLocations = document.querySelector("#show-locations");
+const showCharacters = document.querySelector("#show-characters");
+
+const episodes = document.querySelector("#episodes");
+const locations = document.querySelector("#locations");
+const characters = document.querySelector("#characters");
+
+
+const showSection = (section) => {
+  if (section.classList.contains("hidden")) {
+    return section.classList.remove("hidden");
+  }
+};
+
+const hideSection = (section) => {
+  if (section.classList.contains("hidden")) {
+    return section;
+  } else {
+    return section.classList.add("hidden");
+  }
+};
+
+showEpisodes.onclick = () => {
+  showSection(episodes);
+  hideSection(locations);
+  hideSection(characters);
+	allEpisodes();
+};
+
+showLocations.onclick = () => {
+  showSection(locations);
+  hideSection(characters);
+  hideSection(episodes);
+
+};
+
+showCharacters.onclick = () => {
+  showSection(characters);
+  hideSection(episodes);
+  hideSection(locations);
+
+};
+
 const baseUrl = "https://rickandmortyapi.com/api/";
 
 //FETCH MOSTRAR TODOS LOS PERSONAJES
@@ -14,14 +78,13 @@ const allEpisodes = () => {
   fetch(`${baseUrl}episode`)
     .then((res) => res.json())
     .then((data) => {
-      episodeHtml(data.results);
+      createEpisodesCards(data.results);
     });
 };
 
 //CARD PERSONAJES
 
 const createCharacterCards = (data) => {
-  const characters = document.querySelector("#characters");
   const html = data.reduce((acc, curr) => {
     return (
       acc +
@@ -44,6 +107,35 @@ const createCharacterCards = (data) => {
   }, " ");
 
   characters.innerHTML = html;
+};
+
+//CARD EPISODIOS
+
+const createEpisodesCards = (data) => {
+  const html = data.reduce((acc, curr) => {
+    return (
+      acc +
+      `
+        <article class="card">
+        <h2 class="title">${curr.name}</h2>
+				<div class="subtitle-card">
+				<h3>Episode:</h3>
+        <h4>${curr.episode}</h4>
+				</div>
+        <div class="subtitle-card">
+				<h3>Air date:</h3>
+        <h4>${curr.air_date}</h4>
+				</div>
+        <div class="subtitle-card">
+        <h4>Characters seen:</h4>
+        <img href="https://www.placedog.net/60">
+        </div>    
+        </article>
+        `
+    );
+  }, " ");
+
+  episodes.innerHTML = html;
 };
 
 //PAGINACION
@@ -95,7 +187,8 @@ const pageChange = () => {
     disableButtons();
   };
 
-  pageInput.oninput = () => {
+  pageInput.onchange = (event) => {
+		event.preventDefault();
     currentPage = pageInput.value;
     searchInformation();
   };
