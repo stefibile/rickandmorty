@@ -1,3 +1,20 @@
+// MODO OSCURO 
+
+const lightModeButton = document.getElementById ("light-mode")
+const body = document.getElementById ("body")
+const label = document.getElementById ("toggle-label")
+
+lightModeButton.onclick = () => {
+    body.classList.toggle ("light-mode")
+    if (body.className === "light-mode") {
+        label.innerHTML = "Modo oscuro"
+    }
+    else {
+        label.innerHTML = "Modo claro"
+    }
+}
+
+
 
 // MOSTRAR U OCULTAR SECCIONES
 
@@ -170,7 +187,8 @@ const pageChange = () => {
     disableButtons();
   };
 
-  pageInput.oninput = () => {
+  pageInput.onchange = (event) => {
+		event.preventDefault();
     currentPage = pageInput.value;
     searchInformation();
   };

@@ -33,7 +33,7 @@
   object-fit: cover;
 }
 
-body {
+body, button, input {
   background-color: #141414;
   font-family: "Jura", sans-serif;
 }
@@ -118,6 +118,7 @@ h4 {
   padding-right: 40px;
   padding-top: 30px;
   background: #272640;
+  list-style: none;
 }
 .nav-list .nav-item {
   cursor: pointer;
@@ -126,6 +127,11 @@ h4 {
   transition: transform 0.3s ease;
   transform: scale(1.05);
   color: #ffac4a;
+}
+
+form {
+  display: flex;
+  justify-content: center;
 }
 
 input {
@@ -137,10 +143,16 @@ input {
   font-weight: bold;
   text-align: center;
   caret-color: #ffac4a;
+  border-right: none;
+  border-bottom: 2px inset transparent;
+  outline: none;
 }
 input.page-number {
   width: 150px;
   border-radius: 6px;
+}
+input:focus, input:active {
+  border-bottom: 2px inset #f97432;
 }
 
 .pagination {
@@ -159,6 +171,8 @@ input.page-number {
   background: #1b232c;
   color: #dadada;
   border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
 }
 .pagination button.disabled {
   background: transparent;
@@ -176,6 +190,63 @@ input.page-number {
 
 .subtitle-card {
   margin: 10px 0;
+}
+
+/* LIGHT MODE */
+.light-mode .card-container {
+  background-color: #b6b3b3;
+}
+
+.light-mode h1,
+.light-mode h3,
+.light-mode h4,
+.light-mode h5,
+.light-mode h6 {
+  color: white;
+}
+
+.light-mode .nav-list,
+.light-mode .nav-filter-mode-changer,
+.light-mode .nav-filter-mode-changer .button-mode {
+  background-color: #504d93;
+  color: #141414;
+}
+
+.light-mode .nav-item {
+  color: #141414;
+}
+
+.light-mode textarea,
+.light-mode select,
+.light-mode input {
+  background-color: #b6b3b3;
+  color: #141414;
+}
+
+.nav-filter-mode-changer {
+  height: 50px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  background: #272640;
+  padding: 0 30px 0 30px;
+  list-style: none;
+  align-content: center;
+  align-items: center;
+}
+.nav-filter-mode-changer .button-mode {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+.nav-filter-mode-changer .button-mode .nav-item {
+  cursor: pointer;
+}
+.nav-filter-mode-changer .button-mode .nav-item:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+  color: #ffac4a;
 }
 
 /*# sourceMappingURL=style.css.map */
