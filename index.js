@@ -1,31 +1,33 @@
-// MODO OSCURO 
+// MODO OSCURO
 
-const lightModeButton = document.getElementById ("light-mode")
-const body = document.getElementById ("body")
-const label = document.getElementById ("toggle-label")
+const lightModeButton = document.getElementById("light-mode");
+const body = document.getElementById("body");
+const label = document.getElementById("toggle-label");
 
 lightModeButton.onclick = () => {
-    body.classList.toggle ("light-mode")
-    if (body.className === "light-mode") {
-        label.innerHTML = "Modo oscuro"
-    }
-    else {
-        label.innerHTML = "Modo claro"
-    }
-}
-
-
+  body.classList.toggle("light-mode");
+  if (body.className === "light-mode") {
+    label.innerHTML = "Modo oscuro";
+  } else {
+    label.innerHTML = "Modo claro";
+  }
+};
 
 // MOSTRAR U OCULTAR SECCIONES
+
+const notFound = document.querySelector("#not-found");
 
 const showEpisodes = document.querySelector("#show-episodes");
 const showLocations = document.querySelector("#show-locations");
 const showCharacters = document.querySelector("#show-characters");
 
+const inputEpisodes = document.querySelector("#input-episodes");
+const inputLocations = document.querySelector("#input-locations");
+const inputCharacters = document.querySelector("#input-characters");
+
 const episodes = document.querySelector("#episodes");
 const locations = document.querySelector("#locations");
 const characters = document.querySelector("#characters");
-
 
 const showSection = (section) => {
   if (section.classList.contains("hidden")) {
@@ -43,23 +45,38 @@ const hideSection = (section) => {
 
 showEpisodes.onclick = () => {
   showSection(episodes);
+  showSection(inputEpisodes);
   hideSection(locations);
   hideSection(characters);
-	allEpisodes();
+  hideSection(inputCharacters);
+  hideSection(inputLocations);
+  allEpisodes();
 };
 
 showLocations.onclick = () => {
   showSection(locations);
+  showSection(inputLocations);
   hideSection(characters);
   hideSection(episodes);
-
+  hideSection(inputCharacters);
+  hideSection(inputEpisodes);
+  allLocations();
 };
 
 showCharacters.onclick = () => {
   showSection(characters);
+  showSection(inputCharacters);
   hideSection(episodes);
   hideSection(locations);
+  hideSection(inputEpisodes);
+  hideSection(inputLocations);
+};
 
+showNotFound = () => {
+  hideSection(episodes);
+  hideSection(locations);
+  hideSection(characters);
+  showSection(notFound);
 };
 
 const baseUrl = "https://rickandmortyapi.com/api/";
@@ -80,6 +97,61 @@ const allEpisodes = () => {
     .then((data) => {
       createEpisodesCards(data.results);
     });
+};
+
+//FETCH MOSTRAR LOCACIONES
+
+const allLocations = () => {
+  fetch(`${baseUrl}location`)
+    .then((res) => res.json())
+    .then((data) => {
+      createLocationsCards(data.results);
+    });
+};
+
+//FETCH BUSCAR PERSONAJES
+
+const findCharacters = (characterToSearch) => {
+  fetch(`${baseUrl}character/?name=${characterToSearch}`)
+    .then((res) => res.json())
+    .then((data) => {
+      !data.results ? showNotFound() : createCharacterCards(data.results);
+    });
+};
+
+//FETCH BUSCAR EPISODIOS
+
+const findEpisodes = (episodeToSearch) => {
+  fetch(`${baseUrl}episode/?name=${episodeToSearch}`)
+    .then((res) => res.json())
+    .then((data) => {
+      !data.results ? showNotFound() : createEpisodesCards(data.results);
+    });
+};
+
+//FETCH BUSCAR LOCACIONES
+
+const findLocations = (locationToSearch) => {
+  fetch(`${baseUrl}location/?name=${locationToSearch}`)
+    .then((res) => res.json())
+    .then((data) => {
+      !data.results ? showNotFound() : createLocationsCards(data.results);
+    });
+};
+
+inputCharacters.oninput = () => {
+  characterToSearch = inputCharacters.value;
+  findCharacters(characterToSearch);
+};
+
+inputEpisodes.oninput = () => {
+  episodeToSearch = inputEpisodes.value;
+  findEpisodesinputEpisodes(episodeToSearch);
+};
+
+inputLocations.oninput = () => {
+  locationToSearch = inputLocations.value;
+  findLocations(locationToSearch);
 };
 
 //CARD PERSONAJES
@@ -128,7 +200,7 @@ const createEpisodesCards = (data) => {
 				</div>
         <div class="subtitle-card">
         <h4>Characters seen:</h4>
-        <img href="https://www.placedog.net/60">
+        <img class="small" src="https://www.placedog.net/60">
         </div>    
         </article>
         `
@@ -136,6 +208,35 @@ const createEpisodesCards = (data) => {
   }, " ");
 
   episodes.innerHTML = html;
+};
+
+//CARD LOCACIONES
+
+const createLocationsCards = (data) => {
+  const html = data.reduce((acc, curr) => {
+    return (
+      acc +
+      `
+        <article class="card">
+        <h2 class="title">${curr.name}</h2>
+				<div class="subtitle-card">
+				<h3>Dimension:</h3>
+        <h4>${curr.dimension}</h4>
+				</div>
+        <div class="subtitle-card">
+				<h3>Type:</h3>
+        <h4>${curr.type}</h4>
+				</div>
+        <div class="subtitle-card">
+        <h4>Residents:</h4>
+        <img class="small" src="https://www.placecage.com/200/300">
+        </div>    
+        </article>
+        `
+    );
+  }, " ");
+
+  locations.innerHTML = html;
 };
 
 //PAGINACION
@@ -161,16 +262,16 @@ const pageChange = () => {
 
   const disableButtons = () => {
     if (currentPage === 1) {
-      first.classList.add("disabled")
+      first.classList.add("disabled");
       prev.classList.add("disabled");
     } else if (currentPage === lastPage) {
       next.classList.add("disabled");
       last.classList.add("disabled");
     } else {
-      first.classList.remove("disabled")
-			prev.classList.remove("disabled")
-			next.classList.remove("disabled")
-			last.classList.remove("disabled")
+      first.classList.remove("disabled");
+      prev.classList.remove("disabled");
+      next.classList.remove("disabled");
+      last.classList.remove("disabled");
     }
   };
 
@@ -188,7 +289,7 @@ const pageChange = () => {
   };
 
   pageInput.onchange = (event) => {
-		event.preventDefault();
+    event.preventDefault();
     currentPage = pageInput.value;
     searchInformation();
   };
