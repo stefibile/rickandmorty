@@ -27,7 +27,9 @@
         </ul>
     </nav>
     <form action="" class="search">
-        <input type="text" placeholder="Search here">
+        <input id="input-characters" type="text" placeholder="Search characters here">
+        <input id="input-episodes" class="hidden" type="text" placeholder="Search episodes here">
+        <input id="input-locations" class="hidden" type="text" placeholder="Search locations here">
     </form>
 
     <div class="nav-filter-mode-changer">
@@ -47,6 +49,7 @@
 
     <main class="main">
 
+        <div class="hidden" id="not-found">hola</div>
         <div class="card-container" id="characters"></div>
         <div class="card-container hidden" id="episodes"></div>
         <div class="card-container hidden" id="locations"></div>
