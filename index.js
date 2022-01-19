@@ -146,7 +146,7 @@ inputCharacters.oninput = () => {
 
 inputEpisodes.oninput = () => {
   episodeToSearch = inputEpisodes.value;
-  findEpisodesinputEpisodes(episodeToSearch);
+  findEpisodes(episodeToSearch);
 };
 
 inputLocations.oninput = () => {
@@ -157,6 +157,8 @@ inputLocations.oninput = () => {
 //CARD PERSONAJES
 
 const createCharacterCards = (data) => {
+  showSection(characters);
+  hideSection(notFound);
   const html = data.reduce((acc, curr) => {
     return (
       acc +
@@ -184,6 +186,8 @@ const createCharacterCards = (data) => {
 //CARD EPISODIOS
 
 const createEpisodesCards = (data) => {
+  showSection(episodes);
+  hideSection(notFound);
   const html = data.reduce((acc, curr) => {
     return (
       acc +
@@ -213,6 +217,8 @@ const createEpisodesCards = (data) => {
 //CARD LOCACIONES
 
 const createLocationsCards = (data) => {
+  showSection(locations);
+  hideSection(notFound);
   const html = data.reduce((acc, curr) => {
     return (
       acc +
