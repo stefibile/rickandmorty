@@ -24,6 +24,7 @@ $white: #dadada;
 $black: #1b232c;
 $secondary:#0034b8;
 $light-mode-bg: #ccc;
+$light-mode-bg-white: #e5e5e5;
 $dark-mode-bg:#212121;
 
 
@@ -160,6 +161,11 @@ h4 {
 .not-found {
     display: flex;
     justify-content: center;
+    padding: 0 20px;
+    img {
+        width: 100%;
+        max-width: 600px;
+    }
 }
 
 form {
@@ -283,7 +289,7 @@ input {
 
 .light-mode .card {
     color: hsl(0deg 0% 13%);
-    background-color: hsl(240deg 8% 46%);
+    background-color: $light-mode-bg-white;
 }
 
 .light-mode
@@ -299,7 +305,7 @@ input {
 .light-mode .nav-list,
 .light-mode .nav-filter-mode-changer,
 .light-mode .nav-filter-mode-changer .button-mode {
-    background-color: hsl(240deg 8% 46%);
+    background-color: $light-mode-bg-white;
     color: hsl(0deg 0% 13%);
     font-weight: 600;
 }
@@ -308,13 +314,13 @@ input {
     caret-color: $secondary;
     background-color: $light-mode-bg;
     color: $dark-mode-bg;
+    border-left: 0;
     &:focus {
         border-bottom: 2px inset $secondary;
     }
 }
 
 .light-mode .pagination {
-    background:#b6b3b3 ;
     button {
         background: $light-mode-bg;
         color: $dark-mode-bg;
