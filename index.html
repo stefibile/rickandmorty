@@ -40,14 +40,17 @@
             </button>
         
             <div class="nav-item">
-            <button class="button-mode">A/Z -</button>
-            <button class="button-mode"> Z/A</button>
+            <button id="a-z" class="button-mode">A/Z</button>
+            <span>-</span>
+            <button id="z-a" class="button-mode"> Z/A</button>
             </div>
 
     </div>        
 
 
     <main class="main">
+
+        <h5 class="total-results">Total results: <span id="totalResults"></span></h5>
 
         <div class="hidden not-found" id="not-found">
             <img src="img/not-found.png" alt="">

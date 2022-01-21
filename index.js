@@ -29,7 +29,8 @@ const episodes = document.querySelector("#episodes");
 const locations = document.querySelector("#locations");
 const characters = document.querySelector("#characters");
 const details = document.querySelector("#details");
-const pagination = document.querySelector("#pagination")
+const pagination = document.querySelector("#pagination");
+const totalResults = document.querySelector("#totalResults");
 
 const showSection = (section) => {
   if (section.classList.contains("hidden")) {
@@ -85,11 +86,13 @@ showNotFound = () => {
   hideSection(locations);
   hideSection(characters);
   showSection(notFound);
-  hideSection(pagination)
+  hideSection(pagination);
 };
 
 const baseUrl = "https://rickandmortyapi.com/api/";
 let toFetch = "";
+let sectionOpened = "";
+let toFilter = [];
 
 //FETCH MOSTRAR TODOS LOS PERSONAJES
 
@@ -97,6 +100,8 @@ fetch(`${baseUrl}character`)
   .then((res) => res.json())
   .then((data) => {
     createCharacterCards(data.results);
+    toFilter = data.results;
+    sectionOpened = "character"
   });
 
 //FETCH MOSTRAR EPISODIOS
@@ -106,6 +111,8 @@ const allEpisodes = () => {
     .then((res) => res.json())
     .then((data) => {
       createEpisodesCards(data.results);
+      toFilter = data.results;
+      sectionOpened = "episode"
     });
 };
 
@@ -116,6 +123,8 @@ const allLocations = () => {
     .then((res) => res.json())
     .then((data) => {
       createLocationsCards(data.results);
+      toFilter = data.results;
+      sectionOpened = "location"
     });
 };
 
@@ -352,6 +361,41 @@ const createLocationsCards = (data) => {
   pageChange(toFetch);
 };
 
+//SORTING (medio mentiroso porque con la paginacion solo lo hace en cada pagina)
+
+const aToZ = document.querySelector("#a-z");
+const zToA = document.querySelector("#z-a");
+
+aToZ.onclick = () => {
+  toFilter.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
+  });
+  sectionOpened === "character" && createCharacterCards(toFilter)
+  sectionOpened === "episode" && createEpisodesCards(toFilter)
+  sectionOpened === "location" && createLocationsCards(toFilter)
+};
+
+zToA.onclick = () => {
+  toFilter.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+    return 0;
+  });
+  sectionOpened === "character" && createCharacterCards(toFilter.reverse())
+  sectionOpened === "episode" && createEpisodesCards(toFilter.reverse())
+  sectionOpened === "location" && createLocationsCards(toFilter.reverse())
+};
+
 //PAGINACION
 pageInput = document.querySelector("#page-number");
 let currentPage = 1;
@@ -360,10 +404,9 @@ pageInput.value = 1;
 const resetPagination = () => {
   currentPage = 1;
   pageInput.value = 1;
-}
+};
 
 const pageChange = (toFetch) => {
-
   const first = document.querySelector("#first");
   const next = document.querySelector("#next");
   const prev = document.querySelector("#prev");
@@ -374,6 +417,7 @@ const pageChange = (toFetch) => {
       .then((res) => res.json())
       .then((data) => {
         lastPage = data.info.pages;
+        totalResults.innerHTML = data.info.count;
         pageInput.setAttribute("max", lastPage);
       });
   };
@@ -403,6 +447,7 @@ const pageChange = (toFetch) => {
         toFetch === "character" && createCharacterCards(data.results);
         toFetch === "location" && createLocationsCards(data.results);
         toFetch === "episode" && createEpisodesCards(data.results);
+        toFilter = data.results;
       });
     disableButtons();
   };
