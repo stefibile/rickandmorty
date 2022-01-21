@@ -123,10 +123,14 @@ h4 {
 .nav-list .nav-item {
   cursor: pointer;
 }
-.nav-list .nav-item:hover {
+.nav-list .nav-item:hover, .nav-list .nav-item.active {
   transition: transform 0.3s ease;
   transform: scale(1.05);
   color: #ffac4a;
+}
+
+.nav-item span {
+  color: #dadada;
 }
 
 .small {
@@ -202,6 +206,15 @@ input:focus, input:active {
   background: #ffac4a;
 }
 
+.total-results {
+  color: #dadada;
+  padding: 20px 30px 0;
+  font-size: 16px;
+}
+.total-results span {
+  color: #ffac4a;
+}
+
 .hidden {
   display: none;
 }
@@ -241,7 +254,7 @@ input:focus, input:active {
   color: #0034b8;
 }
 
-.light-mode .nav-list .nav-item:hover {
+.light-mode .nav-list .nav-item:hover, .light-mode .nav-list .nav-item.active {
   transition: transform 0.3s ease;
   transform: scale(1.05);
   color: #0034b8;
@@ -303,6 +316,15 @@ body.light-mode {
 .light-mode .pagination button:hover {
   background: #0034b8;
   color: #ccc;
+}
+
+.light-mode .total-results {
+  color: #1b232c;
+  padding: 20px 30px 0;
+  font-size: 16px;
+}
+.light-mode .total-results span {
+  color: #0034b8;
 }
 
 /*# sourceMappingURL=style.css.map */

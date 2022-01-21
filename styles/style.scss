@@ -142,13 +142,16 @@ h4 {
 
     .nav-item {
         cursor: pointer;
-
-        &:hover {
+        &:hover, &.active {
             transition: transform .3s ease;
             transform: scale(1.05);
             color: $primary;
         }
     }
+}
+
+.nav-item span {
+    color: $white;
 }
 
 .small {
@@ -224,6 +227,14 @@ input {
     }
 }
 
+.total-results {
+    color: $white;
+    padding: 20px 30px 0;
+    font-size: 16px;
+    span {
+        color: $primary;
+    }
+}
 
 .hidden {
     display: none;
@@ -267,7 +278,7 @@ input {
         color:$secondary;  
  }
 
-.light-mode .nav-list .nav-item:hover {
+.light-mode .nav-list .nav-item:hover, .light-mode .nav-list .nav-item.active {
         transition: transform 0.3s ease;
         transform: scale(1.05);
         color:$secondary;  
@@ -334,5 +345,14 @@ input {
             background: $secondary;
             color: $light-mode-bg;
         }
+    }
+}
+
+.light-mode .total-results {
+    color: $black;
+    padding: 20px 30px 0;
+    font-size: 16px;
+    span {
+        color: $secondary;
     }
 }
