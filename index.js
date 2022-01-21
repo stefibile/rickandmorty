@@ -28,6 +28,8 @@ const inputCharacters = document.querySelector("#input-characters");
 const episodes = document.querySelector("#episodes");
 const locations = document.querySelector("#locations");
 const characters = document.querySelector("#characters");
+const details = document.querySelector("#details");
+const pagination = document.querySelector("#pagination")
 
 const showSection = (section) => {
   if (section.classList.contains("hidden")) {
@@ -46,30 +48,36 @@ const hideSection = (section) => {
 showEpisodes.onclick = () => {
   showSection(episodes);
   showSection(inputEpisodes);
+  showSection(pagination);
   hideSection(locations);
   hideSection(characters);
   hideSection(inputCharacters);
   hideSection(inputLocations);
   allEpisodes();
+  resetPagination();
 };
 
 showLocations.onclick = () => {
   showSection(locations);
   showSection(inputLocations);
+  showSection(pagination);
   hideSection(characters);
   hideSection(episodes);
   hideSection(inputCharacters);
   hideSection(inputEpisodes);
   allLocations();
+  resetPagination();
 };
 
 showCharacters.onclick = () => {
   showSection(characters);
   showSection(inputCharacters);
+  showSection(pagination);
   hideSection(episodes);
   hideSection(locations);
   hideSection(inputEpisodes);
   hideSection(inputLocations);
+  resetPagination();
 };
 
 showNotFound = () => {
@@ -77,9 +85,11 @@ showNotFound = () => {
   hideSection(locations);
   hideSection(characters);
   showSection(notFound);
+  hideSection(pagination)
 };
 
 const baseUrl = "https://rickandmortyapi.com/api/";
+let toFetch = "";
 
 //FETCH MOSTRAR TODOS LOS PERSONAJES
 
@@ -154,16 +164,106 @@ inputLocations.oninput = () => {
   findLocations(locationToSearch);
 };
 
+//AGREGAR VISTA DE DETALLE DE CADA CARD
+
+const searchForCardInformation = (id) => {
+  fetch(`https://rickandmortyapi.com/api/${toFetch}/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      toFetch === "character" && createDetailViewForCharacters(data);
+      toFetch === "location" && createDetailViewForLocations(data);
+      toFetch === "episode" && createDetailViewForEpisodes(data);
+    });
+};
+
+const createDetailViewForCharacters = (data) => {
+  showSection(details);
+  hideSection(characters);
+  hideSection(pagination);
+  details.innerHTML = `
+        <article class="card">
+        <h2 class="title">${data.name}</h2>
+        <img src="${data.image}">
+        <div class="status">
+        <h3>${data.status}</h3>
+        <h3> - ${data.species}</h3>
+        </div>
+        <h3>${data.gender}</h3>
+        <div class="status-location">
+        <h4>Last known location:</h4>
+        <h3>${data.location.name}</h3> 
+        </div>        
+        </article>
+        `;
+};
+
+const createDetailViewForLocations = (data) => {
+  showSection(details);
+  hideSection(locations);
+  hideSection(pagination);
+  details.innerHTML = `
+        <article class="card">
+        <h2 class="title">${data.name}</h2> 
+        <div class="subtitle-card">
+				<h3>Dimension:</h3>
+        <h4>${data.dimension}</h4>
+				</div>
+        <div class="subtitle-card">
+				<h3>Type:</h3>
+        <h4>${data.type}</h4>
+				</div>
+        <div class="subtitle-card">
+        <h4>Residents:</h4>
+        <img class="small" src="https://www.placecage.com/200/300">
+        </div>       
+        </article>
+        `;
+};
+
+const createDetailViewForEpisodes = (data) => {
+  showSection(details);
+  hideSection(episodes);
+  hideSection(pagination);
+  details.innerHTML = `
+        <article class="card">
+        <h2 class="title">${data.name}</h2> 
+        <div class="subtitle-card">
+				<h3>Episode:</h3>
+        <h4>${data.episode}</h4>
+				</div>
+        <div class="subtitle-card">
+				<h3>Air date:</h3>
+        <h4>${data.air_date}</h4>
+				</div>
+        <div class="subtitle-card">
+        <h4>Characters seen:</h4>
+        <img class="small" src="https://www.placedog.net/60">
+        </div>       
+        </article>
+        `;
+};
+
+const addClickToCards = () => {
+  const cards = document.querySelectorAll(".card");
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].onclick = () => {
+      const id = cards[i].id;
+      searchForCardInformation(id);
+    };
+  }
+};
+
 //CARD PERSONAJES
 
 const createCharacterCards = (data) => {
   showSection(characters);
   hideSection(notFound);
+  toFetch = "character";
   const html = data.reduce((acc, curr) => {
     return (
       acc +
       `
-        <article class="card">
+        <article class="card" id="${curr.id}">
         <h2 class="title">${curr.name}</h2>
         <img src="${curr.image}">
         <div class="status">
@@ -179,8 +279,9 @@ const createCharacterCards = (data) => {
         `
     );
   }, " ");
-
   characters.innerHTML = html;
+  addClickToCards();
+  pageChange(toFetch);
 };
 
 //CARD EPISODIOS
@@ -188,11 +289,12 @@ const createCharacterCards = (data) => {
 const createEpisodesCards = (data) => {
   showSection(episodes);
   hideSection(notFound);
+  toFetch = "episode";
   const html = data.reduce((acc, curr) => {
     return (
       acc +
       `
-        <article class="card">
+        <article class="card" id="${curr.id}">
         <h2 class="title">${curr.name}</h2>
 				<div class="subtitle-card">
 				<h3>Episode:</h3>
@@ -212,6 +314,8 @@ const createEpisodesCards = (data) => {
   }, " ");
 
   episodes.innerHTML = html;
+  addClickToCards();
+  pageChange(toFetch);
 };
 
 //CARD LOCACIONES
@@ -219,11 +323,12 @@ const createEpisodesCards = (data) => {
 const createLocationsCards = (data) => {
   showSection(locations);
   hideSection(notFound);
+  toFetch = "location";
   const html = data.reduce((acc, curr) => {
     return (
       acc +
       `
-        <article class="card">
+        <article class="card" id="${curr.id}">
         <h2 class="title">${curr.name}</h2>
 				<div class="subtitle-card">
 				<h3>Dimension:</h3>
@@ -243,14 +348,21 @@ const createLocationsCards = (data) => {
   }, " ");
 
   locations.innerHTML = html;
+  addClickToCards();
+  pageChange(toFetch);
 };
 
 //PAGINACION
+pageInput = document.querySelector("#page-number");
+let currentPage = 1;
+pageInput.value = 1;
 
-const pageChange = () => {
-  pageInput = document.querySelector("#page-number");
-  let currentPage = 1;
-  pageInput.value = currentPage;
+const resetPagination = () => {
+  currentPage = 1;
+  pageInput.value = 1;
+}
+
+const pageChange = (toFetch) => {
 
   const first = document.querySelector("#first");
   const next = document.querySelector("#next");
@@ -258,7 +370,7 @@ const pageChange = () => {
   const last = document.querySelector("#last");
 
   const findLastPage = () => {
-    fetch(`${baseUrl}character`)
+    fetch(`${baseUrl}${toFetch}`)
       .then((res) => res.json())
       .then((data) => {
         lastPage = data.info.pages;
@@ -285,12 +397,13 @@ const pageChange = () => {
   disableButtons();
 
   const searchInformation = () => {
-    fetch(`${baseUrl}character?page=${currentPage}`)
+    fetch(`${baseUrl}${toFetch}?page=${currentPage}`)
       .then((res) => res.json())
       .then((data) => {
-        createCharacterCards(data.results);
+        toFetch === "character" && createCharacterCards(data.results);
+        toFetch === "location" && createLocationsCards(data.results);
+        toFetch === "episode" && createEpisodesCards(data.results);
       });
-    pageInput.value = currentPage;
     disableButtons();
   };
 
@@ -302,23 +415,25 @@ const pageChange = () => {
 
   first.onclick = () => {
     currentPage = 1;
+    pageInput.value = 1;
     searchInformation();
   };
 
   prev.onclick = () => {
     currentPage--;
+    pageInput.value--;
     searchInformation();
   };
 
   next.onclick = () => {
     currentPage++;
+    pageInput.value++;
     searchInformation();
   };
 
   last.onclick = () => {
     currentPage = lastPage;
+    pageInput.value = lastPage;
     searchInformation();
   };
 };
-
-pageChange();
