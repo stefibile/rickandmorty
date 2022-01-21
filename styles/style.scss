@@ -133,8 +133,7 @@ h4 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 30px;
-    padding-right: 40px;
+    gap: 25px;
     padding-top: 30px;
     background: hsl(242deg 25% 20%);
     list-style: none;
@@ -190,7 +189,7 @@ input {
     border-bottom: 2px inset transparent;
     outline: none;
     &.page-number {
-        width: 150px;
+        width: 100px;
         border-radius: 6px;
     }
     &:focus, &:active {
