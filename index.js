@@ -198,11 +198,12 @@ const searchForCardInformation = (id) => {
 
 const createDetailViewForCharacters = (data) => {
   showSection(details);
-  hideSection(characters);
   hideSection(pagination);
   hideSection(resultContainer);
   details.innerHTML = `
+        <div class="detail-container">
         <article class="card">
+        <button class="close-button" id="close-button">X</button>
         <h2 class="title">${data.name}</h2>
         <img src="${data.image}">
         <div class="status">
@@ -215,16 +216,20 @@ const createDetailViewForCharacters = (data) => {
         <h3>${data.location.name}</h3> 
         </div>        
         </article>
+        </div>
         `;
+  const closeButton = document.querySelector("#close-button");
+  closeButton.onclick = () => hideSection(details);
 };
 
 const createDetailViewForLocations = (data) => {
   showSection(details);
-  hideSection(locations);
   hideSection(pagination);
   hideSection(resultContainer);
   details.innerHTML = `
+        <div class="detail-container">
         <article class="card">
+        <button class="close-button" id="close-button">X</button>
         <h2 class="title">${data.name}</h2> 
         <img src="img/rick-and-morty-space-assorted-planets-wallpaper.jpg" alt="">
         <div class="subtitle-card">
@@ -236,16 +241,20 @@ const createDetailViewForLocations = (data) => {
         <h4>${data.type}</h4>
 				</div>      
         </article>
+        </div>
         `;
+  const closeButton = document.querySelector("#close-button");
+  closeButton.onclick = () => hideSection(details);
 };
 
 const createDetailViewForEpisodes = (data) => {
   showSection(details);
-  hideSection(episodes);
   hideSection(pagination);
   hideSection(resultContainer);
   details.innerHTML = `
+        <div class="detail-container">
         <article class="card">
+        <button class="close-button" id="close-button">X</button>
         <h2 class="title">${data.name}</h2> 
         <img src="img/rick-morty-critica.jpg" alt="">
         <div class="subtitle-card">
@@ -257,7 +266,10 @@ const createDetailViewForEpisodes = (data) => {
         <h4>${data.air_date}</h4>
 				</div>      
         </article>
+        </div>
         `;
+  const closeButton = document.querySelector("#close-button");
+  closeButton.onclick = () => hideSection(details);
 };
 
 const addClickToCards = () => {

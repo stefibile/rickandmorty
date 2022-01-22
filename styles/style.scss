@@ -72,7 +72,7 @@ body, button, input {
     background-color: $black;
     cursor: pointer;
     flex-grow: 1;
-    max-width: 600px;
+    max-width: 600px; 
 
     .title {
         font-size: 30px;
@@ -98,6 +98,35 @@ body, button, input {
     &:hover {
         transition: transform .3s ease;
         transform: scale(1.01);
+    }
+}
+
+.detail-container {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgb(0 0 0 / 80%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .card {
+        max-width: 400px;
+        .close-button {
+            font-size: 20px;
+            font-weight: 700;
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-content: center;
+            background: transparent;
+            border: 0;
+            color: white;
+            &:hover {
+                color: $primary-strong;
+                cursor: pointer;
+            }
+        }
     }
 }
 
@@ -353,6 +382,13 @@ input {
     padding: 20px 30px 0;
     font-size: 16px;
     span {
+        color: $secondary;
+    }
+}
+
+.light-mode .detail-container .card .close-button {
+    color: $black;
+    &:hover {
         color: $secondary;
     }
 }
