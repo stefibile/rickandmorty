@@ -31,6 +31,7 @@ const characters = document.querySelector("#characters");
 const details = document.querySelector("#details");
 const pagination = document.querySelector("#pagination");
 const totalResults = document.querySelector("#totalResults");
+const resultContainer = document.querySelector("#results-container");
 
 const showSection = (section) => {
   if (section.classList.contains("hidden")) {
@@ -50,10 +51,12 @@ showEpisodes.onclick = () => {
   showSection(episodes);
   showSection(inputEpisodes);
   showSection(pagination);
+  showSection(resultContainer);
   hideSection(locations);
   hideSection(characters);
   hideSection(inputCharacters);
   hideSection(inputLocations);
+  hideSection(details);
   allEpisodes();
   resetPagination();
 };
@@ -62,10 +65,12 @@ showLocations.onclick = () => {
   showSection(locations);
   showSection(inputLocations);
   showSection(pagination);
+  showSection(resultContainer);
   hideSection(characters);
   hideSection(episodes);
   hideSection(inputCharacters);
   hideSection(inputEpisodes);
+  hideSection(details);
   allLocations();
   resetPagination();
 };
@@ -74,10 +79,12 @@ showCharacters.onclick = () => {
   showSection(characters);
   showSection(inputCharacters);
   showSection(pagination);
+  showSection(resultContainer);
   hideSection(episodes);
   hideSection(locations);
   hideSection(inputEpisodes);
   hideSection(inputLocations);
+  hideSection(details);
   resetPagination();
 };
 
@@ -87,6 +94,7 @@ showNotFound = () => {
   hideSection(characters);
   showSection(notFound);
   hideSection(pagination);
+  hideSection(resultContainer);
 };
 
 const baseUrl = "https://rickandmortyapi.com/api/";
@@ -161,16 +169,19 @@ const findLocations = (locationToSearch) => {
 inputCharacters.oninput = () => {
   characterToSearch = inputCharacters.value;
   findCharacters(characterToSearch);
+  hideSection(resultContainer);
 };
 
 inputEpisodes.oninput = () => {
   episodeToSearch = inputEpisodes.value;
   findEpisodes(episodeToSearch);
+  hideSection(resultContainer);
 };
 
 inputLocations.oninput = () => {
   locationToSearch = inputLocations.value;
   findLocations(locationToSearch);
+  hideSection(resultContainer);
 };
 
 //AGREGAR VISTA DE DETALLE DE CADA CARD
@@ -189,6 +200,7 @@ const createDetailViewForCharacters = (data) => {
   showSection(details);
   hideSection(characters);
   hideSection(pagination);
+  hideSection(resultContainer);
   details.innerHTML = `
         <article class="card">
         <h2 class="title">${data.name}</h2>
@@ -210,9 +222,11 @@ const createDetailViewForLocations = (data) => {
   showSection(details);
   hideSection(locations);
   hideSection(pagination);
+  hideSection(resultContainer);
   details.innerHTML = `
         <article class="card">
         <h2 class="title">${data.name}</h2> 
+        <img src="img/rick-and-morty-space-assorted-planets-wallpaper.jpg" alt="">
         <div class="subtitle-card">
 				<h3>Dimension:</h3>
         <h4>${data.dimension}</h4>
@@ -220,11 +234,7 @@ const createDetailViewForLocations = (data) => {
         <div class="subtitle-card">
 				<h3>Type:</h3>
         <h4>${data.type}</h4>
-				</div>
-        <div class="subtitle-card">
-        <h4>Residents:</h4>
-        <img class="small" src="https://www.placecage.com/200/300">
-        </div>       
+				</div>      
         </article>
         `;
 };
@@ -233,9 +243,11 @@ const createDetailViewForEpisodes = (data) => {
   showSection(details);
   hideSection(episodes);
   hideSection(pagination);
+  hideSection(resultContainer);
   details.innerHTML = `
         <article class="card">
         <h2 class="title">${data.name}</h2> 
+        <img src="img/rick-morty-critica.jpg" alt="">
         <div class="subtitle-card">
 				<h3>Episode:</h3>
         <h4>${data.episode}</h4>
@@ -243,11 +255,7 @@ const createDetailViewForEpisodes = (data) => {
         <div class="subtitle-card">
 				<h3>Air date:</h3>
         <h4>${data.air_date}</h4>
-				</div>
-        <div class="subtitle-card">
-        <h4>Characters seen:</h4>
-        <img class="small" src="https://www.placedog.net/60">
-        </div>       
+				</div>      
         </article>
         `;
 };
@@ -275,15 +283,6 @@ const createCharacterCards = (data) => {
         <article class="card" id="${curr.id}">
         <h2 class="title">${curr.name}</h2>
         <img src="${curr.image}">
-        <div class="status">
-        <h3>${curr.status}</h3>
-        <h3> - ${curr.species}</h3>
-        </div>
-        <h3>${curr.gender}</h3>
-        <div class="status-location">
-        <h4>Last known location:</h4>
-        <h3>${curr.location.name}</h3> 
-        </div>    
         </article>
         `
     );
@@ -304,19 +303,8 @@ const createEpisodesCards = (data) => {
       acc +
       `
         <article class="card" id="${curr.id}">
-        <h2 class="title">${curr.name}</h2>
-				<div class="subtitle-card">
-				<h3>Episode:</h3>
-        <h4>${curr.episode}</h4>
-				</div>
-        <div class="subtitle-card">
-				<h3>Air date:</h3>
-        <h4>${curr.air_date}</h4>
-				</div>
-        <div class="subtitle-card">
-        <h4>Characters seen:</h4>
-        <img class="small" src="https://www.placedog.net/60">
-        </div>    
+        <h2 class="title">${curr.name}</h2> 
+        <img src="img/rick-morty-critica.jpg" alt="">
         </article>
         `
     );
@@ -339,18 +327,7 @@ const createLocationsCards = (data) => {
       `
         <article class="card" id="${curr.id}">
         <h2 class="title">${curr.name}</h2>
-				<div class="subtitle-card">
-				<h3>Dimension:</h3>
-        <h4>${curr.dimension}</h4>
-				</div>
-        <div class="subtitle-card">
-				<h3>Type:</h3>
-        <h4>${curr.type}</h4>
-				</div>
-        <div class="subtitle-card">
-        <h4>Residents:</h4>
-        <img class="small" src="https://www.placecage.com/200/300">
-        </div>    
+        <img src="img/rick-and-morty-space-assorted-planets-wallpaper.jpg" alt="">
         </article>
         `
     );
@@ -448,8 +425,10 @@ const pageChange = (toFetch) => {
         toFetch === "location" && createLocationsCards(data.results);
         toFetch === "episode" && createEpisodesCards(data.results);
         toFilter = data.results;
+        hideSection(resultContainer);
       });
     disableButtons();
+    
   };
 
   pageInput.onchange = (event) => {
