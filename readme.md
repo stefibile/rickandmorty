@@ -1,4 +1,4 @@
-![Imagén ilustrativa de presentación del proyecto](rick-y-morty.png)
+![Imagén ilustrativa de presentación del proyecto](img/rick-y-morty.png)
 
 ## Rick and Morty API
 
