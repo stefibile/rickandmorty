@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- El contenido de la web esta en inglés, así que ese debería ser el lenguaje del documento -->
 <html lang="es">
 
 <head>
@@ -16,6 +17,8 @@
 <body id="body">
 
     <header class="header">
+        <!-- El alt en la imagen no es opcional, no lo dejes vacio a menos que sea una imagen decorativa 
+        (un borde, una linea, etc) -->
         <img class="logo" src="img/logo.png" alt="">
         <img class="background" src="img/galaxy.jpg" alt="">
     </header>
@@ -27,6 +30,7 @@
         </ul>
     </nav>
     <form action="" class="search">
+        <!-- Falta label o aria label en estos elementos, si no el lector de pantalla no sabe lo que son  -->
         <input id="input-characters" type="text" placeholder="Search characters here">
         <input id="input-episodes" class="hidden" type="text" placeholder="Search episodes here">
         <input id="input-locations" class="hidden" type="text" placeholder="Search locations here">
@@ -50,6 +54,7 @@
 
     <main class="main">
 
+        <!-- total-results,  no uses camelCase en html -->
         <h5 id="results-container" class="total-results">Total results: <span id="totalResults"></span></h5>
 
         <div class="hidden not-found" id="not-found">
@@ -62,6 +67,7 @@
 
         <div class="pagination" id="pagination">
             <button class="first-page" id="first">
+                <!-- los botones que tienen solo como contenido un icono necesitan aria label  -->
                 <i class="fas fa-angle-double-left"></i>
             </button>
             <button class="previous-page" id="prev">
