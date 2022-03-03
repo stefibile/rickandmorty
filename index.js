@@ -88,6 +88,7 @@ showCharacters.onclick = () => {
   resetPagination();
 };
 
+// falta el const aca !! const showNotFound = () => {
 showNotFound = () => {
   hideSection(episodes);
   hideSection(locations);
@@ -167,18 +168,21 @@ const findLocations = (locationToSearch) => {
 };
 
 inputCharacters.oninput = () => {
+  // const characterToSearch, no lo olvides!!
   characterToSearch = inputCharacters.value;
   findCharacters(characterToSearch);
   hideSection(resultContainer);
 };
 
 inputEpisodes.oninput = () => {
+  // falta const 
   episodeToSearch = inputEpisodes.value;
   findEpisodes(episodeToSearch);
   hideSection(resultContainer);
 };
 
 inputLocations.oninput = () => {
+  // falta const 
   locationToSearch = inputLocations.value;
   findLocations(locationToSearch);
   hideSection(resultContainer);
@@ -386,6 +390,7 @@ zToA.onclick = () => {
 };
 
 //PAGINACION
+// falta el const 
 pageInput = document.querySelector("#page-number");
 let currentPage = 1;
 pageInput.value = 1;
@@ -405,6 +410,7 @@ const pageChange = (toFetch) => {
     fetch(`${baseUrl}${toFetch}`)
       .then((res) => res.json())
       .then((data) => {
+        // falta el const 
         lastPage = data.info.pages;
         totalResults.innerHTML = data.info.count;
         pageInput.setAttribute("max", lastPage);
